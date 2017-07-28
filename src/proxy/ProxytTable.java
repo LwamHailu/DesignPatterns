@@ -1,6 +1,6 @@
 package proxy;
 
-import lesson2.Table;
+import adapter.Table;
 
 public class ProxytTable  implements ITable{
     private ITable table= new Table();

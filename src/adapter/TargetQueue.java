@@ -1,4 +1,4 @@
-package lesson2;
+package adapter;
 
 public interface TargetQueue<T> {
 	public T dequeue() throws Exception;

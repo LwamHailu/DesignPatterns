@@ -1,4 +1,4 @@
-package lesson2;
+package adapter;
 
 public interface TargetStack<T> {
 	public void push(T t);
