@@ -19,8 +19,8 @@ public class Main {
         Employee E3 = new Employee(3, null, null);
         
         Employee E4= new Employee(4,  null, null);
-        Employee E5 = new Employee(5, null, null);        
-        Employee E6 = new Employee(6, null, null);
+//        Employee E5 = new Employee(5, null, null);        
+//        Employee E6 = new Employee(6, null, null);
         
         Employee[] E1S = new Employee[2] ;
         E1S[0] = E2;
@@ -42,8 +42,9 @@ public class Main {
         E3.setSupervisor(E2);
         E3.setStaff(E3S);
         
-        E1.clone();
-        System.out.println(E1.toString());
+       E4= E1.clone();
+        System.out.println(E1);
+        System.out.println(E4);
 		
 		
 		

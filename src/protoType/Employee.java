@@ -1,7 +1,14 @@
 package protoType;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Employee implements Cloneable,Serializable {
 	
@@ -96,18 +103,40 @@ public class Employee implements Cloneable,Serializable {
 	
 	@Override
 	protected Employee clone() throws CloneNotSupportedException {
-		Employee employee=new Employee(id,supervisor,staff);
-		return employee;
+
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        Employee clonedE = null;
+        try {
+            // deep copy
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(bos);
+            oos.writeObject(this);
+            oos.flush();
+            ByteArrayInputStream bin
+                    = new ByteArrayInputStream(bos.toByteArray());
+            ois = new ObjectInputStream(bin);
+            clonedE = (Employee) ois.readObject();
+            this.setId(100);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Exception in main = " + e);
+        } finally {
+            try {
+                oos.close();
+                ois.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return clonedE;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", streetAddress="
-				+ streetAddress + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode + ", supervisor="
-				+ supervisor + ", staff=" + Arrays.toString(staff) + "]";
+   @Override
+	public String toString(){
+	   return "id ="+this.getId();
+		
 	}
-
 
 	
 }
